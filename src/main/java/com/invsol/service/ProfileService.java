@@ -17,18 +17,14 @@ public class ProfileService {
 	@GET
 	@Path("/business/{id}.json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Sample getBusinessUserProfile(@PathParam("id") String userName) {
+	public String getBusinessUserProfile(@PathParam("id") String restaurantID) {
  
-		Sample track = new Sample();
-		track.setTitle("username is=="+userName);
-		track.setSinger("Khokhar");
- 
-		return track;
+		return ("restaurantID is=="+restaurantID);
  
 	}
 	
 	@PUT
-	@Path("/business")
+	@Path("/business/{id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTrackInJSON(Sample track) {
  
