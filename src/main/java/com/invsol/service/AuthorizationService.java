@@ -14,9 +14,9 @@ import javax.ws.rs.core.Response;
 public class AuthorizationService {
 	
 	@POST
-	@Path("/business")
+	@Path("/business.json")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createTrackInJSON(InputStream incomingData) {
+	public Response authorizeBusinessUser(InputStream incomingData) {
  
 		StringBuilder crunchifyBuilder = new StringBuilder();
         try {
