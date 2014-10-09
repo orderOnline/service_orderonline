@@ -13,7 +13,7 @@ public class AuthenticateUser {
 		
 	}
 	
-	public void authenticateBusinessUser(int phoneNumber, String password){
+	public void authenticateBusinessUser(String phoneNumber, String password){
 		Connection conn = null;
 
 		conn = DBConnectionUtil.getConnection();
@@ -27,8 +27,9 @@ public class AuthenticateUser {
 		try {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, phoneNumber);
+			stmt.setString(1, phoneNumber);
 			stmt.setString(2, password);
+			System.out.println("final sql query=="+stmt.toString());
 			int i = stmt.executeUpdate();
 			if (i > 0)
 			{

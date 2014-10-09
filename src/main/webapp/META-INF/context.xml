@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Context>
+  <Resource name="jdbc/db_orderonline" auth="Container" type="javax.sql.DataSource"
+               maxActive="50" maxIdle="30" maxWait="10000"  maxPoolSize="50"  minPoolSize="10"
+               username="root" password="password123" 
+               driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/db_orderonline?autoReconnect=true"
+              />
+</Context>

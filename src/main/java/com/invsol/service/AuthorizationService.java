@@ -22,7 +22,7 @@ public class AuthorizationService {
 	@Path("/business.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response authorizeBusinessUser(InputStream incomingData) {
- 
+		System.out.println("I am inside authorize business user.");
 		StringBuilder crunchifyBuilder = new StringBuilder();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
@@ -37,7 +37,7 @@ public class AuthorizationService {
         try {
 			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
 			AuthenticateUser authenticateUser = new AuthenticateUser();
-			authenticateUser.authenticateBusinessUser(userData.getInt("phonenumber"), userData.getString("password"));
+			authenticateUser.authenticateBusinessUser(userData.getString("phonenumber"), userData.getString("password"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
