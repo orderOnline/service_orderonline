@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.invsol.dao.AuthenticateUser;
+
 @Path("authorize")
 public class AuthorizationService {
 	
@@ -29,6 +31,14 @@ public class AuthorizationService {
             System.out.println("Error Parsing: - ");
         }
         System.out.println("Data Received: " + crunchifyBuilder.toString());
+        /*try {
+			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
+			AuthenticateUser authenticateUser = new AuthenticateUser();
+			authenticateUser.authenticateBusinessUser(userData.getInt("phonenumber"), userData.getString("password"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
  
         // return HTTP response 200 in case of success
         return Response.status(200).entity(crunchifyBuilder.toString()).build();
