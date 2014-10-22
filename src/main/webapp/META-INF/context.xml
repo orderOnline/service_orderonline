@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Context>
-  <Resource name="jdbc/db_orderonline" auth="Container" type="javax.sql.DataSource"
+  <Resource name="jdbc/d2qfvo61ti4c06" auth="Container" type="javax.sql.DataSource"
                maxActive="50" maxIdle="30" maxWait="10000"  maxPoolSize="50"  minPoolSize="10"
-               username="root" password="password123" 
-               driverClassName="com.mysql.jdbc.Driver"
-               url="jdbc:mysql://localhost:3306/db_orderonline?autoReconnect=true"
+               username="toacplzlqzsgtk" password="VQwP9QAbXMuLyEYX3JbDhZqRRe" 
+               driverClassName="org.postgresql.Driver"
+               url="jdbc:postgresql://ec2-54-197-238-242.compute-1.amazonaws.com:5432/d2qfvo61ti4c06?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
               />
 </Context>

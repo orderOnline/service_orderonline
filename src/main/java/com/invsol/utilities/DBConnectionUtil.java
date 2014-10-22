@@ -16,7 +16,7 @@ public class DBConnectionUtil {
 		try {
 			ctx = new InitialContext();
 			Context envCtx = (Context)ctx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/db_orderonline");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/d2qfvo61ti4c06");
 			
 			
 			/*InitialContext ctx = new InitialContext();

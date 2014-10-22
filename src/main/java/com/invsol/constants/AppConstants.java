@@ -6,9 +6,18 @@ public class AppConstants {
 	public static String TABLE_RESTAURANT = "restaurant";
 	public static String TABLE_RESTAURANT_COLUMN_PHONENUMBER = "phonenumber";
 	public static String TABLE_RESTAURANT_COLUMN_PASSWORD = "password";
+	public static String TABLE_CUISINE = "cusines";
 	//-----------------------------------------------------------------------------------
 	
 	//JSON SPECIFIC CONSTANTS
+	public static String JSON_RESULT = "result";
+	public static String JSON_TYPE = "type";
+	public static String JSON_RESPONSE = "response";
+	public static String JSON_TYPE_SUCCESS = "success";
+	public static String JSON_TYPE_ERROR = "error";
+	public static String JSON_CUISINES = "cuisines";
+	public static String JSON_CUISINE_ID = "cuisine_id";
+	public static String JSON_CUISINE_NAME = "cuisine_name";
 	public static String JSON_PASSWORD = "password";
 	public static String JSON_PHONENUMBER = "phonenumber";
 	//-----------------------------------------------------------------------------------
