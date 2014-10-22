@@ -4,9 +4,11 @@ public class AppConstants {
 	
 	//DB SPECIFIC CONSTANTS
 	public static String TABLE_RESTAURANT = "restaurant";
+	public static String TABLE_RESTAURANT_COLUMN_RESTAURANT_ID = "restaurant_id";
 	public static String TABLE_RESTAURANT_COLUMN_PHONENUMBER = "phonenumber";
 	public static String TABLE_RESTAURANT_COLUMN_PASSWORD = "password";
 	public static String TABLE_RESTAURANT_COLUMN_OTPCODE = "otp_code";
+	
 	public static String TABLE_CUISINE = "cusines";
 	//-----------------------------------------------------------------------------------
 	
