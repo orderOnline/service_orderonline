@@ -88,10 +88,12 @@ public class AuthorizationService {
 			boolean isTokenValid = authenticateUser
 					.validateotpBusinessUser(userData.getString(AppConstants.JSON_RESTAURANT_ID),
 							userData.getString(AppConstants.JSON_OTP_CODE));
-			JSONObject resultJson = new JSONObject();
-			resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
-			resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_VALID_OTP_CODE);
-			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			if (isTokenValid) {
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_VALID_OTP_CODE);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}
 		} catch (JSONException e) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
 					e.getMessage(), "");

@@ -8,6 +8,15 @@ public class AppConstants {
 	public static String TABLE_RESTAURANT_COLUMN_PHONENUMBER = "phonenumber";
 	public static String TABLE_RESTAURANT_COLUMN_PASSWORD = "password";
 	public static String TABLE_RESTAURANT_COLUMN_OTPCODE = "otp_code";
+	public static String TABLE_RESTAURANT_COLUMN_NAME = "name";
+	public static String TABLE_RESTAURANT_COLUMN_EMAIL = "email";
+	public static String TABLE_RESTAURANT_COLUMN_SERVICE_STARTTIME = "service_start_time";
+	public static String TABLE_RESTAURANT_COLUMN_SERVICE_ENDTIME = "service_end_time";
+	public static String TABLE_RESTAURANT_COLUMN_CLOSEDON = "closedon";
+	public static String TABLE_RESTAURANT_COLUMN_ADDRESS = "address";
+	public static String TABLE_RESTAURANT_COLUMN_CITY = "city";
+	public static String TABLE_RESTAURANT_COLUMN_STATE = "state";
+	public static String TABLE_RESTAURANT_COLUMN_ZIPCODE = "zipcode";
 	
 	public static String TABLE_CUISINE = "cusines";
 	//-----------------------------------------------------------------------------------
@@ -33,6 +42,7 @@ public class AppConstants {
 	public static String JSON_RESTAURANT_ID = "restaurant_id";
 	public static String JSON_OTP_CODE = "otpcode";
 	public static String JSON_VALID_OTP_CODE = "valid otp";
+	public static String JSON_BUSINESS_PROFILE_UPDATED = "profile updated sucessfully";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	
