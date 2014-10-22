@@ -41,7 +41,7 @@ public class AuthorizationService {
         try {
 			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
 			AuthenticateUser authenticateUser = new AuthenticateUser();
-			authenticateUser.authenticateBusinessUser(userData.getString(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PHONENUMBER));
+			authenticateUser.authenticateBusinessUser(userData.getString(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PASSWORD));
 		} catch (JSONException e) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
 					e.getMessage(), "");

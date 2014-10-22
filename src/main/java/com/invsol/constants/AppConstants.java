@@ -6,7 +6,15 @@ public class AppConstants {
 	public static String TABLE_RESTAURANT = "restaurant";
 	public static String TABLE_RESTAURANT_COLUMN_PHONENUMBER = "phonenumber";
 	public static String TABLE_RESTAURANT_COLUMN_PASSWORD = "password";
+	public static String TABLE_RESTAURANT_COLUMN_OTPCODE = "otp_code";
 	public static String TABLE_CUISINE = "cusines";
+	//-----------------------------------------------------------------------------------
+	
+	//SMS SPECIFIC CONSTANTS
+	public static String SMS_USERNAME = "rachnakhokhar";
+	public static String SMS_PASSWORD = "199159";
+	public static String SMS_MESSAGE = "Kindly validate your OTP Code : ";
+	public static String SMS_SENDERID = "WEBSMS";
 	//-----------------------------------------------------------------------------------
 	
 	//JSON SPECIFIC CONSTANTS
