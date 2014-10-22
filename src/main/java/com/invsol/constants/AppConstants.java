@@ -30,6 +30,9 @@ public class AppConstants {
 	public static String JSON_CUISINE_NAME = "cuisine_name";
 	public static String JSON_PASSWORD = "password";
 	public static String JSON_PHONENUMBER = "phonenumber";
+	public static String JSON_RESTAURANT_ID = "restaurant_id";
+	public static String JSON_OTP_CODE = "otpcode";
+	public static String JSON_VALID_OTP_CODE = "valid otp";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	
