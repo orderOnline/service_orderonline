@@ -3,6 +3,8 @@ package com.invsol.constants;
 public class QueryConstants {
 
 	// Restaurant Specific Queries
+	public static final String QUERY_AUTHENTICATE_RESTAURANT = "SELECT * FROM " + AppConstants.TABLE_RESTAURANT + " WHERE "
+			+ AppConstants.TABLE_RESTAURANT_COLUMN_PHONENUMBER + " = ? AND " + AppConstants.TABLE_RESTAURANT_COLUMN_PASSWORD + " = ?";
 	public static final String QUERY_AUTHORIZE_BUSINESS_USER = "INSERT INTO " + AppConstants.TABLE_RESTAURANT + "("
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_PHONENUMBER + "," + AppConstants.TABLE_RESTAURANT_COLUMN_PASSWORD
 			+ "," + AppConstants.TABLE_RESTAURANT_COLUMN_OTPCODE + ")" + " VALUES (?,?,?)";

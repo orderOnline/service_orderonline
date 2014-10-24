@@ -44,7 +44,7 @@ public class AuthorizationService {
 			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
 			AuthorizeUser authorizeUser = new AuthorizeUser();
 			BusinessUser businessUserData = authorizeUser.authorizeBusinessUser(
-					userData.getString(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PASSWORD));
+					userData.getLong(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PASSWORD));
 			JSONObject resultJson = new JSONObject();
 			resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
 			JSONObject businessUserJSON = new JSONObject();

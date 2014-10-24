@@ -21,7 +21,7 @@ public AuthorizeUser(){
 		
 	}
 	
-	public BusinessUser authorizeBusinessUser(String phoneNumber, String password) throws AppException{
+	public BusinessUser authorizeBusinessUser(long phoneNumber, String password) throws AppException{
 		BusinessUser businessUserDetails = null;
 		//Method call to send OTP Code to user.
 		String OTPCode = OTP_Generation.generateRandomOTP(6);
@@ -34,7 +34,7 @@ public AuthorizeUser(){
 			try {
 				conn.setAutoCommit(false);
 				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				stmt.setLong(1, Long.parseLong(phoneNumber));
+				stmt.setLong(1, phoneNumber);
 				stmt.setString(2, password);
 				stmt.setInt(3, Integer.parseInt(OTPCode));
 				System.out.println("final sql query=="+stmt.toString());
