@@ -23,6 +23,13 @@ public class AppConstants {
 	public static String TABLE_RESTAURANT_CUISINE = "restaurant_cusine";
 	public static String TABLE_RESTAURANT_CUISINES_COLUMN_RESTAURANT_ID = "restaurant_id";
 	public static String TABLE_RESTAURANT_CUISINES_COLUMN_CUISINE_ID = "cusine_id";
+	
+	public static String TABLE_CATEGORY = "categories";
+	public static String TABLE_CATEGORY_COLUMN_CATEGORY_NAME = "category_name";
+	public static String TABLE_CATEGORY_COLUMN_CATEGORY_ID = "category_id";
+	public static String TABLE_CATEGORY_COLUMN_RESTAURANT_ID = "restaurant_id";
+	
+	public static String TABLE_MENUITEMS = "menuitems";
 	//-----------------------------------------------------------------------------------
 	
 	//SMS SPECIFIC CONSTANTS

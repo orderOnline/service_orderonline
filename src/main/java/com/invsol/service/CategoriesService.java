@@ -14,7 +14,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("menucategories")
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import com.invsol.constants.AppConstants;
+import com.invsol.dao.CategoryData;
+import com.invsol.dto.CategoryDataObject;
+import com.invsol.errorhandling.AppException;
+
+@Path("categories")
 public class CategoriesService {
 	
 	@PUT
@@ -41,10 +50,11 @@ public class CategoriesService {
 	}
 	
 	@POST
+	@Path("/{id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenuCategory(InputStream incomingData) {
- 
+	public Response addMenuCategory(@PathParam("id") String restaurantID, InputStream incomingData) throws AppException {
+		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
@@ -56,9 +66,32 @@ public class CategoriesService {
             System.out.println("Error Parsing: - ");
         }
         System.out.println("Authenticate Data Received: " + crunchifyBuilder.toString());
- 
-        // return HTTP response 200 in case of success
-        return Response.status(200).entity(crunchifyBuilder.toString()).build();
+        try {
+			JSONObject categoryData = new JSONObject(crunchifyBuilder.toString());
+			CategoryData objCategory = new CategoryData();
+			boolean isCategoryAdded = objCategory.addNewCategory(Integer.parseInt(restaurantID), categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
+			if(isCategoryAdded){
+				CategoryDataObject[] db_data = objCategory.getCategories(Integer.parseInt(restaurantID));
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+				JSONArray categoriesArray = new JSONArray();
+				JSONObject tempCategoryObj = null;
+				for (int i = 0; i < db_data.length; i++) {
+					tempCategoryObj = new JSONObject();
+					tempCategoryObj.put(AppConstants.JSON_CUISINE_ID, db_data[i].getCategory_id());
+					tempCategoryObj.put(AppConstants.JSON_CUISINE_NAME, db_data[i].getCategory_name());
+					categoriesArray.put(tempCategoryObj);
+				}
+				resultJson.put(AppConstants.JSON_RESPONSE, categoriesArray);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}
+		} catch (JSONException e) {
+			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
+					e.getMessage(), "");
+		}
+
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(finalResponseJson.toString()).build();
  
 	}
 	
