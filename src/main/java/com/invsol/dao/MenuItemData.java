@@ -2,6 +2,7 @@ package com.invsol.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -9,6 +10,8 @@ import javax.ws.rs.core.Response;
 
 import com.invsol.constants.AppConstants;
 import com.invsol.constants.QueryConstants;
+import com.invsol.dto.CategoryDataObject;
+import com.invsol.dto.MenuDataObject;
 import com.invsol.errorhandling.AppException;
 import com.invsol.utilities.DBConnectionUtil;
 
@@ -18,7 +21,8 @@ public class MenuItemData {
 		
 	}
 	
-	public boolean addMenuItem(int cuisine_id, int category_id, String item_name, int price)throws AppException{
+	public MenuDataObject addMenuItem(int cuisine_id, int category_id, String item_name, int price)throws AppException{
+		MenuDataObject newMenuItem = null;
 		Connection conn = null;
 		conn = DBConnectionUtil.getConnection();
 		PreparedStatement stmt = null;
@@ -33,13 +37,18 @@ public class MenuItemData {
 			System.out.println("final sql query==" + stmt.toString());
 			int i = stmt.executeUpdate();
 			if (i > 0) {
+				ResultSet rs = stmt.getGeneratedKeys();
+				while(rs.next()){
+					System.out.println("id=="+rs.getInt("item_id"));
+					newMenuItem = new MenuDataObject(rs.getInt("item_id"), item_name, price, cuisine_id, category_id);
+				}
 			} else {
 				System.out.println("record not inserted");
 				throw new AppException(Response.Status.NOT_IMPLEMENTED.getStatusCode(), 500,
 						AppConstants.ERROR_SQL_QUERY_EXECUTION, "", "");
 			}
 			conn.commit();
-			return true;
+			return newMenuItem;
 		} catch (SQLException se) {
 			System.out.println("got se===" + se.getMessage());
 			if (se.getMessage().startsWith("Duplicate")) {
@@ -65,7 +74,7 @@ public class MenuItemData {
 						AppConstants.ERROR_SQL_QUERY_EXECUTION, "", "");
 			}
 		}
-		return false;
+		return newMenuItem;
 	}
 
 }

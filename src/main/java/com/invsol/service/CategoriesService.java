@@ -25,64 +25,59 @@ import com.invsol.errorhandling.AppException;
 
 @Path("categories")
 public class CategoriesService {
-	
+
 	@PUT
 	@Path("/{id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateMenuCategory(@PathParam("id") String restaurantID, InputStream incomingData) {
- 
+
 		StringBuilder crunchifyBuilder = new StringBuilder();
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                crunchifyBuilder.append(line);
-            }
-        } catch (Exception e) {
-            System.out.println("Error Parsing: - ");
-        }
-        System.out.println("Profile Data Received: " + crunchifyBuilder.toString());
- 
-        // return HTTP response 200 in case of success
-        return Response.status(200).entity(crunchifyBuilder.toString()).build();
- 
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				crunchifyBuilder.append(line);
+			}
+		} catch (Exception e) {
+			System.out.println("Error Parsing: - ");
+		}
+		System.out.println("Profile Data Received: " + crunchifyBuilder.toString());
+
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(crunchifyBuilder.toString()).build();
+
 	}
-	
+
 	@POST
 	@Path("/{restaurant_id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenuCategory(@PathParam("restaurant_id") String restaurantID, InputStream incomingData) throws AppException {
+	public Response addMenuCategory(@PathParam("restaurant_id") String restaurantID, InputStream incomingData)
+			throws AppException {
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                crunchifyBuilder.append(line);
-            }
-        } catch (Exception e) {
-            System.out.println("Error Parsing: - ");
-        }
-        System.out.println("Authenticate Data Received: " + crunchifyBuilder.toString());
-        try {
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				crunchifyBuilder.append(line);
+			}
+		} catch (Exception e) {
+			System.out.println("Error Parsing: - ");
+		}
+		System.out.println("Authenticate Data Received: " + crunchifyBuilder.toString());
+		try {
 			JSONObject categoryData = new JSONObject(crunchifyBuilder.toString());
 			CategoryData objCategory = new CategoryData();
-			boolean isCategoryAdded = objCategory.addNewCategory(Integer.parseInt(restaurantID), categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
-			if(isCategoryAdded){
-				CategoryDataObject[] db_data = objCategory.getCategories(Integer.parseInt(restaurantID));
+			CategoryDataObject newAddCat = objCategory.addNewCategory(Integer.parseInt(restaurantID),
+					categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
+			if (newAddCat != null) {
 				JSONObject resultJson = new JSONObject();
 				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
-				JSONArray categoriesArray = new JSONArray();
-				JSONObject tempCategoryObj = null;
-				for (int i = 0; i < db_data.length; i++) {
-					tempCategoryObj = new JSONObject();
-					tempCategoryObj.put(AppConstants.JSON_CUISINE_ID, db_data[i].getCategory_id());
-					tempCategoryObj.put(AppConstants.JSON_CUISINE_NAME, db_data[i].getCategory_name());
-					categoriesArray.put(tempCategoryObj);
-				}
-				resultJson.put(AppConstants.JSON_RESPONSE, categoriesArray);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_CATEGORY_ID, newAddCat.getCategory_id());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
 		} catch (JSONException e) {
@@ -92,16 +87,16 @@ public class CategoriesService {
 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();
- 
+
 	}
-	
+
 	@DELETE
 	@Path("/{id}.json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String deleteMenuCategory(@PathParam("id") String categoryID) {
- 
-		return ("categoryID is=="+categoryID);
-        
+
+		return ("categoryID is==" + categoryID);
+
 	}
 
 }

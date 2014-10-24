@@ -59,6 +59,8 @@ public class AppConstants {
 	public static String JSON_VALID_OTP_CODE = "valid otp";
 	public static String JSON_BUSINESS_PROFILE_UPDATED = "profile updated sucessfully";
 	public static String JSON_MENUITEM_ADDED = "menuitem added successfully";
+	public static String JSON_CATEGORY_ID = "category_id";
+	public static String JSON_MENUITEM_ID = "item_id";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	

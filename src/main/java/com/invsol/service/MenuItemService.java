@@ -22,6 +22,7 @@ import com.invsol.constants.AppConstants;
 import com.invsol.dao.CategoryData;
 import com.invsol.dao.MenuItemData;
 import com.invsol.dto.CategoryDataObject;
+import com.invsol.dto.MenuDataObject;
 import com.invsol.errorhandling.AppException;
 
 @Path("menuitem")
@@ -70,11 +71,13 @@ public class MenuItemService {
         try {
 			JSONObject menuItemData = new JSONObject(crunchifyBuilder.toString());
 			MenuItemData objMenuItem = new MenuItemData();
-			boolean isMenuItemAdded = objMenuItem.addMenuItem(menuItemData.getInt(AppConstants.TABLE_MENUITEMS_COLUMN_CUISINE_ID),Integer.parseInt(categoryID), menuItemData.getString(AppConstants.TABLE_MENUITEMS_COLUMN_NAME), menuItemData.getInt(AppConstants.TABLE_MENUITEMS_COLUMN_PRICE));
-			if(isMenuItemAdded){
+			MenuDataObject newAddedMenu = objMenuItem.addMenuItem(menuItemData.getInt(AppConstants.TABLE_MENUITEMS_COLUMN_CUISINE_ID),Integer.parseInt(categoryID), menuItemData.getString(AppConstants.TABLE_MENUITEMS_COLUMN_NAME), menuItemData.getInt(AppConstants.TABLE_MENUITEMS_COLUMN_PRICE));
+			if(newAddedMenu != null){
 				JSONObject resultJson = new JSONObject();
 				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
-				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_MENUITEM_ADDED);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_MENUITEM_ID, newAddedMenu.getItem_id());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
 		} catch (JSONException e) {

@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import com.invsol.constants.AppConstants;
 import com.invsol.constants.QueryConstants;
+import com.invsol.dto.BusinessUser;
 import com.invsol.dto.CategoryDataObject;
 import com.invsol.errorhandling.AppException;
 import com.invsol.utilities.DBConnectionUtil;
@@ -76,7 +77,8 @@ public class CategoryData {
 		return null;
 	}
 
-	public boolean addNewCategory(int restaurant_id, String categoryName) throws AppException {
+	public CategoryDataObject addNewCategory(int restaurant_id, String categoryName) throws AppException {
+		CategoryDataObject newCat = null;
 		Connection conn = null;
 		conn = DBConnectionUtil.getConnection();
 		PreparedStatement stmt = null;
@@ -89,13 +91,18 @@ public class CategoryData {
 			System.out.println("final sql query==" + stmt.toString());
 			int i = stmt.executeUpdate();
 			if (i > 0) {
+				ResultSet rs = stmt.getGeneratedKeys();
+				while(rs.next()){
+					System.out.println("id=="+rs.getInt("category_id"));
+					newCat = new CategoryDataObject(rs.getInt("category_id"), categoryName);
+				}
 			} else {
 				System.out.println("record not inserted");
 				throw new AppException(Response.Status.NOT_IMPLEMENTED.getStatusCode(), 500,
 						AppConstants.ERROR_SQL_QUERY_EXECUTION, "", "");
 			}
 			conn.commit();
-			return true;
+			return newCat;
 		} catch (SQLException se) {
 			System.out.println("got se===" + se.getMessage());
 			if (se.getMessage().startsWith("Duplicate")) {
@@ -121,7 +128,7 @@ public class CategoryData {
 						AppConstants.ERROR_SQL_QUERY_EXECUTION, "", "");
 			}
 		}
-		return false;
+		return newCat;
 	}
 	
 	private int getCategoriesCount( Connection conn, int restaurant_id ) throws AppException{
