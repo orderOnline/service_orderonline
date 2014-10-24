@@ -19,6 +19,12 @@ public class QueryConstants {
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_CITY + "," + AppConstants.TABLE_RESTAURANT_COLUMN_STATE + ","
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_ZIPCODE + ")" + " = (?,?,?,?,?,?,?,?,?)" + " WHERE "
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_RESTAURANT_ID + " = ?";
+	public static final String QUERY_UPDATE_RESTAURANT_OTPCODE = "UPDATE " + AppConstants.TABLE_RESTAURANT
+			+ " SET (" + AppConstants.TABLE_RESTAURANT_COLUMN_OTPCODE + ")" + " = (?)" + " WHERE "
+			+ AppConstants.TABLE_RESTAURANT_COLUMN_PHONENUMBER + " = ?";
+	public static final String QUERY_UPDATE_RESTAURANT_PASSWORD = "UPDATE " + AppConstants.TABLE_RESTAURANT
+			+ " SET (" + AppConstants.TABLE_RESTAURANT_COLUMN_PASSWORD + ")" + " = (?)" + " WHERE "
+			+ AppConstants.TABLE_RESTAURANT_COLUMN_PHONENUMBER + " = ? AND " + AppConstants.TABLE_RESTAURANT_COLUMN_OTPCODE + " = ?";
 
 	// Cuisines Specific Queries
 	public static final String QUERY_GET_COUNT_CUISINES = "SELECT COUNT(*) FROM " + AppConstants.TABLE_CUISINE;

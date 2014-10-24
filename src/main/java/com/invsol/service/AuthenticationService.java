@@ -16,7 +16,6 @@ import org.codehaus.jettison.json.JSONObject;
 
 import com.invsol.constants.AppConstants;
 import com.invsol.dao.AuthenticateUser;
-import com.invsol.dao.AuthorizeUser;
 import com.invsol.dto.BusinessUser;
 import com.invsol.errorhandling.AppException;
 
