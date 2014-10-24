@@ -14,6 +14,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import com.invsol.constants.AppConstants;
+import com.invsol.dao.CategoryData;
+import com.invsol.dao.MenuItemData;
+import com.invsol.dto.CategoryDataObject;
+import com.invsol.errorhandling.AppException;
+
 @Path("menuitem")
 public class MenuItemService {
 	
@@ -41,10 +51,11 @@ public class MenuItemService {
 	}
 	
 	@POST
+	@Path("/{category_id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenuItem(InputStream incomingData) {
- 
+	public Response addMenuItem(@PathParam("category_id") String categoryID, InputStream incomingData) throws AppException {
+		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
@@ -56,9 +67,23 @@ public class MenuItemService {
             System.out.println("Error Parsing: - ");
         }
         System.out.println("Authenticate Data Received: " + crunchifyBuilder.toString());
- 
-        // return HTTP response 200 in case of success
-        return Response.status(200).entity(crunchifyBuilder.toString()).build();
+        try {
+			JSONObject menuItemData = new JSONObject(crunchifyBuilder.toString());
+			MenuItemData objMenuItem = new MenuItemData();
+			boolean isMenuItemAdded = objMenuItem.addMenuItem(menuItemData.getInt(AppConstants.TABLE_MENUITEMS_COLUMN_CUISINE_ID),Integer.parseInt(categoryID), menuItemData.getString(AppConstants.TABLE_MENUITEMS_COLUMN_NAME), menuItemData.getInt(AppConstants.TABLE_MENUITEMS_COLUMN_PRICE));
+			if(isMenuItemAdded){
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_MENUITEM_ADDED);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}
+		} catch (JSONException e) {
+			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
+					e.getMessage(), "");
+		}
+
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(finalResponseJson.toString()).build();
  
 	}
 	

@@ -77,7 +77,6 @@ public class CategoryData {
 	}
 
 	public boolean addNewCategory(int restaurant_id, String categoryName) throws AppException {
-		int category_id_gen = -1;
 		Connection conn = null;
 		conn = DBConnectionUtil.getConnection();
 		PreparedStatement stmt = null;
@@ -90,11 +89,6 @@ public class CategoryData {
 			System.out.println("final sql query==" + stmt.toString());
 			int i = stmt.executeUpdate();
 			if (i > 0) {
-				ResultSet rs = stmt.getGeneratedKeys();
-				while (rs.next()) {
-					System.out.println("id==" + rs.getInt("category_id"));
-					category_id_gen = rs.getInt("category_id");
-				}
 			} else {
 				System.out.println("record not inserted");
 				throw new AppException(Response.Status.NOT_IMPLEMENTED.getStatusCode(), 500,

@@ -50,10 +50,10 @@ public class CategoriesService {
 	}
 	
 	@POST
-	@Path("/{id}.json")
+	@Path("/{restaurant_id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenuCategory(@PathParam("id") String restaurantID, InputStream incomingData) throws AppException {
+	public Response addMenuCategory(@PathParam("restaurant_id") String restaurantID, InputStream incomingData) throws AppException {
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
         try {

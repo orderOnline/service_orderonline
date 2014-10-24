@@ -36,5 +36,12 @@ public class QueryConstants {
 			+ AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_ID + "," + AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME
 			+ " FROM " + AppConstants.TABLE_CATEGORY + " WHERE " + AppConstants.TABLE_RESTAURANT_COLUMN_RESTAURANT_ID
 			+ " = ?";
+	
+	//MenuItem Specific Queries
+	public static final String QUERY_INSERT_MENUITEM_DETAILS = "INSERT INTO " + AppConstants.TABLE_MENUITEMS + "("
+			+ AppConstants.TABLE_MENUITEMS_COLUMN_NAME + ","
+			+ AppConstants.TABLE_MENUITEMS_COLUMN_PRICE + ","
+			+ AppConstants.TABLE_MENUITEMS_COLUMN_CUISINE_ID + ","
+			+ AppConstants.TABLE_MENUITEMS_COLUMN_CATEGORY_ID + ")" + " VALUES (?,?,?,?)";
 
 }

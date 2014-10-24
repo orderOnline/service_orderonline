@@ -30,6 +30,10 @@ public class AppConstants {
 	public static String TABLE_CATEGORY_COLUMN_RESTAURANT_ID = "restaurant_id";
 	
 	public static String TABLE_MENUITEMS = "menuitems";
+	public static String TABLE_MENUITEMS_COLUMN_NAME = "name";
+	public static String TABLE_MENUITEMS_COLUMN_PRICE = "price";
+	public static String TABLE_MENUITEMS_COLUMN_CUISINE_ID = "cusine_id";
+	public static String TABLE_MENUITEMS_COLUMN_CATEGORY_ID = "category_id";
 	//-----------------------------------------------------------------------------------
 	
 	//SMS SPECIFIC CONSTANTS
@@ -54,6 +58,7 @@ public class AppConstants {
 	public static String JSON_OTP_CODE = "otpcode";
 	public static String JSON_VALID_OTP_CODE = "valid otp";
 	public static String JSON_BUSINESS_PROFILE_UPDATED = "profile updated sucessfully";
+	public static String JSON_MENUITEM_ADDED = "menuitem added successfully";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	
