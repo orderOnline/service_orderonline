@@ -11,12 +11,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.invsol.constants.AppConstants;
-import com.invsol.dao.AuthenticateUser;
+import com.invsol.dao.AuthorizeUser;
 import com.invsol.dto.BusinessUser;
 import com.invsol.errorhandling.AppException;
 
@@ -43,8 +42,8 @@ public class AuthorizationService {
 		System.out.println("Data Received: " + crunchifyBuilder.toString());
 		try {
 			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
-			AuthenticateUser authenticateUser = new AuthenticateUser();
-			BusinessUser businessUserData = authenticateUser.authenticateBusinessUser(
+			AuthorizeUser authorizeUser = new AuthorizeUser();
+			BusinessUser businessUserData = authorizeUser.authorizeBusinessUser(
 					userData.getString(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PASSWORD));
 			JSONObject resultJson = new JSONObject();
 			resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
@@ -84,8 +83,8 @@ public class AuthorizationService {
 		System.out.println("Data Received: " + crunchifyBuilder.toString());
 		try {
 			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
-			AuthenticateUser authenticateUser = new AuthenticateUser();
-			boolean isTokenValid = authenticateUser
+			AuthorizeUser authorizeUser = new AuthorizeUser();
+			boolean isTokenValid = authorizeUser
 					.validateotpBusinessUser(userData.getString(AppConstants.JSON_RESTAURANT_ID),
 							userData.getString(AppConstants.JSON_OTP_CODE));
 			if (isTokenValid) {
