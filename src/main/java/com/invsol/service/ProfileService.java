@@ -60,6 +60,12 @@ public class ProfileService {
 				closedOnArray[i] = closedArr.optInt(i);
 			}
 			
+			JSONArray cuisinesArr = profileData.getJSONArray(AppConstants.JSON_CUISINES);
+			Integer[] cuisinesArray = new Integer[cuisinesArr.length()];
+			for (int i = 0; i < cuisinesArray.length; i++) {
+				cuisinesArray[i] = cuisinesArr.optInt(i);
+			}			
+			
 			ProfileData profileDAO = new ProfileData();
 			boolean isProfileUpdated = profileDAO.updateBusinessUserProfile(Integer.parseInt(restaurantID), profileData.getString(AppConstants.TABLE_RESTAURANT_COLUMN_NAME),
 					profileData.getString(AppConstants.TABLE_RESTAURANT_COLUMN_EMAIL), 
@@ -70,7 +76,7 @@ public class ProfileService {
 					profileData.getString(AppConstants.TABLE_RESTAURANT_COLUMN_CITY), 
 					profileData.getString(AppConstants.TABLE_RESTAURANT_COLUMN_STATE), 
 					profileData.getInt(AppConstants.TABLE_RESTAURANT_COLUMN_ZIPCODE),
-					closedOnArray);
+					cuisinesArray);
 			if (isProfileUpdated) {
 				JSONObject resultJson = new JSONObject();
 				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);

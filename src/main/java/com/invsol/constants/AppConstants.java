@@ -19,6 +19,10 @@ public class AppConstants {
 	public static String TABLE_RESTAURANT_COLUMN_ZIPCODE = "zipcode";
 	
 	public static String TABLE_CUISINE = "cusines";
+	
+	public static String TABLE_RESTAURANT_CUISINE = "restaurant_cusine";
+	public static String TABLE_RESTAURANT_CUISINES_COLUMN_RESTAURANT_ID = "restaurant_id";
+	public static String TABLE_RESTAURANT_CUISINES_COLUMN_CUISINE_ID = "cusine_id";
 	//-----------------------------------------------------------------------------------
 	
 	//SMS SPECIFIC CONSTANTS

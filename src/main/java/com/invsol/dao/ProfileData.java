@@ -53,6 +53,26 @@ public class ProfileData {
 				throw new AppException(Response.Status.NOT_IMPLEMENTED.getStatusCode(), 500, AppConstants.ERROR_SQL_QUERY_EXECUTION,
 						"", "");
 			}
+			
+			//Code to insert Restaurant Cuisines Details
+			stmt = null;
+			sql = QueryConstants.QUERY_INSERT_RESTAURANT_CUISINES_DETAILS;
+			conn.setAutoCommit(false);
+			for (int j = 0; j < cuisine_id.length; j++) {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, restaurant_id);
+				stmt.setInt(2, cuisine_id[j]);
+				System.out.println("final sql query=="+stmt.toString());
+				int count = stmt.executeUpdate();
+				if (count > 0){
+					System.out.println("record inserted");
+				}else {
+					System.out.println("record not inserted");
+					throw new AppException(Response.Status.NOT_IMPLEMENTED.getStatusCode(), 500, AppConstants.ERROR_SQL_QUERY_EXECUTION,
+							"", "");
+				}
+			}
+			
 			conn.commit();
 			return true;
 		} catch (SQLException se) {
