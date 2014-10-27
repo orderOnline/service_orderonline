@@ -17,6 +17,7 @@ public class AppConstants {
 	public static String TABLE_RESTAURANT_COLUMN_CITY = "city";
 	public static String TABLE_RESTAURANT_COLUMN_STATE = "state";
 	public static String TABLE_RESTAURANT_COLUMN_ZIPCODE = "zipcode";
+	public static String TABLE_RESTAURANT_COLUMN_GCMKEY = "gcm_reg_key";
 	
 	public static String TABLE_CUISINE = "cusines";
 	
@@ -34,6 +35,28 @@ public class AppConstants {
 	public static String TABLE_MENUITEMS_COLUMN_PRICE = "price";
 	public static String TABLE_MENUITEMS_COLUMN_CUISINE_ID = "cusine_id";
 	public static String TABLE_MENUITEMS_COLUMN_CATEGORY_ID = "category_id";
+	public static String TABLE_MENUITEMS_COLUMN_ITEM_ID = "item_id";
+	
+	public static String TABLE_ORDERDETAILS = "order_details";
+	public static String TABLE_ORDERDETAILS_ORDERID = "order_id";
+	public static String TABLE_ORDERDETAILS_RESTAURANTID = "restaurant_id";
+	public static String TABLE_ORDERDETAILS_CONSUMERID = "consumer_id";
+	public static String TABLE_ORDERDETAILS_TIMESTAMP = "timestamp";
+	public static String TABLE_ORDERDETAILS_ORDERTOTAL = "ordder_total";
+	public static String TABLE_ORDERDETAILS_INSTRUCTION = "instruction";
+	
+	public static String TABLE_ORDERMENUITEMS = "ordermenuitems";
+	public static String TABLE_ORDERMENUITEMS_ORDERID = "order_id";
+	public static String TABLE_ORDERMENUITEMS_ITEMID = "item_id";
+	public static String TABLE_ORDERMENUITEMS_QUANTITY = "quantity";
+	
+	public static String TABLE_CONSUMER = "consumer";
+	public static String TABLE_CONSUMER_COLUMN_NAME = "name";
+	public static String TABLE_CONSUMER_COLUMN_ADDRESS = "address";
+	public static String TABLE_CONSUMER_COLUMN_CITY = "city";
+	public static String TABLE_CONSUMER_COLUMN_STATE = "state";
+	public static String TABLE_CONSUMER_COLUMN_ZIPCODE = "zipcode";
+	public static String TABLE_CONSUMER_COLUMN_PHONENUMBER = "phonenumber";
 	//-----------------------------------------------------------------------------------
 	
 	//SMS SPECIFIC CONSTANTS
@@ -63,6 +86,16 @@ public class AppConstants {
 	public static String JSON_MENUITEM_ID = "item_id";
 	public static String JSON_VALID_OTP_GENERATED = "otp generated";
 	public static String JSON_BUSINESS_PASSWORD_RESET = "password reset sucessfully";
+	public static String JSON_ITEM_ID = "item_id";
+	public static String JSON_ORDER_ID = "order_id";
+	public static String JSON_QUANTITY = "quantity";
+	public static String JSON_CONSUMER_ID = "consumer_id";
+	public static String JSON_TIMESTAMP = "timestamp";
+	public static String JSON_INSTRUCTIONS = "instructions";
+	public static String JSON_ORDERTOTAL = "order_total";
+	public static String JSON_ORDER_ITEMS = "order_items";
+	public static String JSON_ORDER_GENERATED = "New order generated";
+	public static String JSON_ORDER = "ORDER";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	

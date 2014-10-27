@@ -1,5 +1,9 @@
 package com.invsol.service;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,6 +23,7 @@ import com.invsol.errorhandling.AppException;
 public class CuisinesService {
 
 	@GET
+	@Path("/all.json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCuisines() {
 		System.out.println("I am inside this method");
@@ -38,6 +43,10 @@ public class CuisinesService {
 				tempCuisineObj.put(AppConstants.JSON_CUISINE_NAME, db_data[i].getCuisine_name());
 				cuisinesArray.put(tempCuisineObj);
 			}
+			
+			Calendar calendar = Calendar.getInstance();
+		    java.sql.Timestamp ourJavaTimestampObject = new java.sql.Timestamp(calendar.getTime().getTime());
+		    System.out.println("timestamp=="+ourJavaTimestampObject);
 			resultJson.put(AppConstants.JSON_RESPONSE, cuisinesArray);
 			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 		} catch (AppException e) {
