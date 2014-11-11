@@ -8,7 +8,7 @@ public class QueryConstants {
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_PASSWORD + " = ?";
 	public static final String QUERY_AUTHORIZE_BUSINESS_USER = "INSERT INTO " + AppConstants.TABLE_RESTAURANT + "("
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_PHONENUMBER + "," + AppConstants.TABLE_RESTAURANT_COLUMN_PASSWORD
-			+ "," + AppConstants.TABLE_RESTAURANT_COLUMN_OTPCODE + ")" + " VALUES (?,?,?)";
+			+ "," + AppConstants.TABLE_RESTAURANT_COLUMN_OTPCODE + "," + AppConstants.TABLE_RESTAURANT_COLUMN_GCMKEY + ")" + " VALUES (?,?,?,?)";
 	public static final String QUERY_VALIDATE_RESTAURANT_OTPCODE = "SELECT "
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_RESTAURANT_ID + " FROM " + AppConstants.TABLE_RESTAURANT + " WHERE "
 			+ AppConstants.TABLE_RESTAURANT_COLUMN_OTPCODE + " = ?";

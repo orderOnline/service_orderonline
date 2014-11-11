@@ -96,6 +96,7 @@ public class AppConstants {
 	public static String JSON_ORDER_ITEMS = "order_items";
 	public static String JSON_ORDER_GENERATED = "New order generated";
 	public static String JSON_ORDER = "ORDER";
+	public static String JSON_GCM_KEY = "gcm_key";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	

@@ -15,7 +15,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.invsol.constants.AppConstants;
-import com.invsol.dao.AuthorizeUser;
+import com.invsol.dao.RegisterUser;
 import com.invsol.dao.ForgotPasswordImpl;
 import com.invsol.errorhandling.AppException;
 
