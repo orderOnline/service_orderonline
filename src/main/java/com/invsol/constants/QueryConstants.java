@@ -83,4 +83,15 @@ public class QueryConstants {
 			+ AppConstants.TABLE_MENUITEMS + "." + AppConstants.TABLE_MENUITEMS_COLUMN_ITEM_ID + "="
 			+ AppConstants.TABLE_ORDERMENUITEMS + "." + AppConstants.TABLE_ORDERMENUITEMS_ITEMID + " WHERE "
 			+ AppConstants.TABLE_ORDERMENUITEMS + "." + AppConstants.TABLE_ORDERMENUITEMS_ORDERID + " = ?";
+	
+	// Consumer Specific Queries
+		public static final String QUERY_LOGIN_CONSUMER = "SELECT * FROM " + AppConstants.TABLE_CONSUMER
+				+ " WHERE " + AppConstants.TABLE_CONSUMER_COLUMN_PHONENUMBER + " = ? AND "
+				+ AppConstants.TABLE_CONSUMER_COLUMN_PASSWORD + " = ?";
+		public static final String QUERY_REGISTER_CONSUMER = "INSERT INTO " + AppConstants.TABLE_CONSUMER + "("
+				+ AppConstants.TABLE_CONSUMER_COLUMN_PHONENUMBER + "," + AppConstants.TABLE_CONSUMER_COLUMN_PASSWORD
+				+ "," + AppConstants.TABLE_CONSUMER_COLUMN_OTPCODE + "," + AppConstants.TABLE_CONSUMER_COLUMN_GCMKEY + ")" + " VALUES (?,?,?,?)";
+		public static final String QUERY_VALIDATE_CONSUMER_OTPCODE = "SELECT "
+				+ AppConstants.TABLE_CONSUMER_COLUMN_CONSUMER_ID + " FROM " + AppConstants.TABLE_CONSUMER + " WHERE "
+				+ AppConstants.TABLE_CONSUMER_COLUMN_OTPCODE + " = ?";
 }

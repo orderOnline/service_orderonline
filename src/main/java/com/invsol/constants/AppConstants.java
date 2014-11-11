@@ -57,6 +57,10 @@ public class AppConstants {
 	public static String TABLE_CONSUMER_COLUMN_STATE = "state";
 	public static String TABLE_CONSUMER_COLUMN_ZIPCODE = "zipcode";
 	public static String TABLE_CONSUMER_COLUMN_PHONENUMBER = "phonenumber";
+	public static String TABLE_CONSUMER_COLUMN_PASSWORD = "password";
+	public static String TABLE_CONSUMER_COLUMN_GCMKEY = "gcm_reg_key";
+	public static String TABLE_CONSUMER_COLUMN_OTPCODE = "otp_code";
+	public static String TABLE_CONSUMER_COLUMN_CONSUMER_ID = "consumer_id";
 	//-----------------------------------------------------------------------------------
 	
 	//SMS SPECIFIC CONSTANTS
@@ -97,6 +101,7 @@ public class AppConstants {
 	public static String JSON_ORDER_GENERATED = "New order generated";
 	public static String JSON_ORDER = "ORDER";
 	public static String JSON_GCM_KEY = "gcm_key";
+	public static String JSON_ADDRESS = "address";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	
