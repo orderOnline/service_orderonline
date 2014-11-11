@@ -17,6 +17,7 @@ import org.codehaus.jettison.json.JSONObject;
 import com.invsol.constants.AppConstants;
 import com.invsol.dao.LoginUser;
 import com.invsol.dto.BusinessUser;
+import com.invsol.dto.Consumer;
 import com.invsol.errorhandling.AppException;
 
 /**
@@ -31,7 +32,7 @@ public class LoginService {
 	@Path("/business.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response authenticateBusinessUser(InputStream incomingData) throws AppException {
+	public Response loginBusinessUser(InputStream incomingData) throws AppException {
 		System.out.println("I am inside authenticate business user.");
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
@@ -48,7 +49,7 @@ public class LoginService {
 		try {
 			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
 			LoginUser loginUser = new LoginUser();
-			BusinessUser businessUserData = loginUser.authenticateBusinessUser(userData.getLong(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PASSWORD));
+			BusinessUser businessUserData = loginUser.loginBusinessUser(userData.getLong(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PASSWORD));
 			JSONObject resultJson = new JSONObject();
 			resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
 			JSONObject businessUserJSON = new JSONObject();
@@ -64,6 +65,54 @@ public class LoginService {
 			businessUserJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_SERVICE_ENDTIME, businessUserData.getService_end_time());
 			businessUserJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_ZIPCODE, businessUserData.getZipcode());
 			resultJson.put(AppConstants.JSON_RESPONSE, businessUserJSON);
+			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+		} catch (JSONException e) {
+			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
+					e.getMessage(), "");
+		}
+
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(finalResponseJson.toString()).build();
+ 
+	}
+	
+	//------------------------------------------------------------------------------------------------------------
+	
+	@POST
+	@Path("/consumer.json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response loginConsumer(InputStream incomingData) throws AppException {
+		System.out.println("I am inside login consumer.");
+		JSONObject finalResponseJson = new JSONObject();
+		StringBuilder crunchifyBuilder = new StringBuilder();
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				crunchifyBuilder.append(line);
+			}
+		} catch (Exception e) {
+			System.out.println("Error Parsing: - ");
+		}
+		System.out.println("Data Received: " + crunchifyBuilder.toString());
+		try {
+			JSONObject userData = new JSONObject(crunchifyBuilder.toString());
+			LoginUser loginUser = new LoginUser();
+			Consumer consumerData = loginUser.loginConsumer(userData.getLong(AppConstants.JSON_PHONENUMBER), userData.getString(AppConstants.JSON_PASSWORD));
+			JSONObject resultJson = new JSONObject();
+			resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+			JSONObject consumerJSON = new JSONObject();
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_CONSUMER_ID,
+					consumerData.getConsumer_id());
+			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_PHONENUMBER, consumerData.getPhonenumber());
+			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_NAME, consumerData.getName());
+			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_EMAIL, consumerData.getEmail());
+			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_ADDRESS, consumerData.getAddress());
+			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_CITY, consumerData.getCity());
+			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_STATE, consumerData.getState());
+			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_ZIPCODE, consumerData.getZipcode());
+			resultJson.put(AppConstants.JSON_RESPONSE, consumerJSON);
 			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 		} catch (JSONException e) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
