@@ -105,13 +105,13 @@ public class LoginService {
 			JSONObject consumerJSON = new JSONObject();
 			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_CONSUMER_ID,
 					consumerData.getConsumer_id());
-			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_PHONENUMBER, consumerData.getPhonenumber());
-			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_NAME, consumerData.getName());
-			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_EMAIL, consumerData.getEmail());
-			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_ADDRESS, consumerData.getAddress());
-			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_CITY, consumerData.getCity());
-			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_STATE, consumerData.getState());
-			consumerJSON.put(AppConstants.TABLE_RESTAURANT_COLUMN_ZIPCODE, consumerData.getZipcode());
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_PHONENUMBER, consumerData.getPhonenumber());
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_NAME, consumerData.getName());
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_EMAIL, consumerData.getEmail());
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_ADDRESS, consumerData.getAddress());
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_CITY, consumerData.getCity());
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_STATE, consumerData.getState());
+			consumerJSON.put(AppConstants.TABLE_CONSUMER_COLUMN_ZIPCODE, consumerData.getZipcode());
 			resultJson.put(AppConstants.JSON_RESPONSE, consumerJSON);
 			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 		} catch (JSONException e) {
