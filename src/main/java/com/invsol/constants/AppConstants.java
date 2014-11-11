@@ -52,6 +52,7 @@ public class AppConstants {
 	
 	public static String TABLE_CONSUMER = "consumer";
 	public static String TABLE_CONSUMER_COLUMN_NAME = "name";
+	public static String TABLE_CONSUMER_COLUMN_EMAIL = "email";
 	public static String TABLE_CONSUMER_COLUMN_ADDRESS = "address";
 	public static String TABLE_CONSUMER_COLUMN_CITY = "city";
 	public static String TABLE_CONSUMER_COLUMN_STATE = "state";
@@ -85,6 +86,7 @@ public class AppConstants {
 	public static String JSON_OTP_CODE = "otpcode";
 	public static String JSON_VALID_OTP_CODE = "valid otp";
 	public static String JSON_BUSINESS_PROFILE_UPDATED = "profile updated sucessfully";
+	public static String JSON_CONSUMER_PROFILE_UPDATED = "profile updated sucessfully";
 	public static String JSON_MENUITEM_ADDED = "menuitem added successfully";
 	public static String JSON_CATEGORY_ID = "category_id";
 	public static String JSON_MENUITEM_ID = "item_id";

@@ -102,4 +102,60 @@ public class ProfileData {
 		}
 		return false;
 	}
+	//---------------------------------------------------------------------------------------------------------------------
+	
+	public boolean updateConsumerProfile(int consumer_id, String name, String email, String address, String city, String state,
+			int zipcode) throws AppException {
+		Connection conn = null;
+		conn = DBConnectionUtil.getConnection();
+		PreparedStatement stmt = null;
+		String sql = QueryConstants.QUERY_UPDATE_CONSUMER_PROFILE;
+		try {
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, name);
+			stmt.setString(2, email);
+			stmt.setString(6, address);
+			stmt.setString(7, city);
+			stmt.setString(8, state);
+			stmt.setInt(9, zipcode);
+			stmt.setInt(10, consumer_id);
+			System.out.println("final sql query=="+stmt.toString());
+			int i = stmt.executeUpdate();
+			if (i > 0){
+				System.out.println("record inserted");
+			}else {
+				System.out.println("record not inserted");
+				throw new AppException(Response.Status.NOT_IMPLEMENTED.getStatusCode(), 500, AppConstants.ERROR_SQL_QUERY_EXECUTION,
+						"", "");
+			}
+			conn.commit();
+			return true;
+		} catch (SQLException se) {
+			System.out.println("got se==="+se.getMessage());
+			if(se.getMessage().startsWith("Duplicate")){
+				throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 401, AppConstants.ERROR_USER_ALREADY_REGISTERED,
+				se.getMessage(), "");
+			}
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se1) {
+				System.out.println("got se1");
+				se1.printStackTrace();
+				
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se2) {
+				System.out.println("got se2");
+				se2.printStackTrace();
+				throw new AppException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), 500, AppConstants.ERROR_SQL_QUERY_EXECUTION,
+						"", "");
+			}
+		}
+		return false;
+	}
 }

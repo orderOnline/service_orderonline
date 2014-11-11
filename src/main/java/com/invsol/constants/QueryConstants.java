@@ -94,4 +94,10 @@ public class QueryConstants {
 		public static final String QUERY_VALIDATE_CONSUMER_OTPCODE = "SELECT "
 				+ AppConstants.TABLE_CONSUMER_COLUMN_CONSUMER_ID + " FROM " + AppConstants.TABLE_CONSUMER + " WHERE "
 				+ AppConstants.TABLE_CONSUMER_COLUMN_OTPCODE + " = ?";
+		public static final String QUERY_UPDATE_CONSUMER_PROFILE = "UPDATE " + AppConstants.TABLE_CONSUMER
+				+ " SET (" + AppConstants.TABLE_CONSUMER_COLUMN_NAME + "," + AppConstants.TABLE_CONSUMER_COLUMN_EMAIL
+				+ "," + AppConstants.TABLE_CONSUMER_COLUMN_ADDRESS + ","
+				+ AppConstants.TABLE_CONSUMER_COLUMN_CITY + "," + AppConstants.TABLE_CONSUMER_COLUMN_STATE + ","
+				+ AppConstants.TABLE_CONSUMER_COLUMN_ZIPCODE + ")" + " = (?,?,?,?,?,?)" + " WHERE "
+				+ AppConstants.TABLE_CONSUMER_COLUMN_CONSUMER_ID + " = ?";
 }

@@ -92,4 +92,58 @@ public class ProfileService {
 		return Response.status(200).entity(finalResponseJson.toString()).build();
 
 	}
+	
+	//------------------------------------------------------------------------------------------------------------------
+	
+	@GET
+	@Path("/consumer/{id}.json")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getConsumerProfile(@PathParam("id") String consumerID) {
+
+		return ("consumerID is==" + consumerID);
+
+	}
+
+	@PUT
+	@Path("/consumer/{id}.json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateConsumerProfile(@PathParam("id") String consumerID, InputStream incomingData)
+			throws AppException {
+		JSONObject finalResponseJson = new JSONObject();
+		StringBuilder crunchifyBuilder = new StringBuilder();
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				crunchifyBuilder.append(line);
+			}
+		} catch (Exception e) {
+			System.out.println("Error Parsing: - ");
+		}
+		System.out.println("Profile Data Received: " + crunchifyBuilder.toString());
+		try {
+			JSONObject profileData = new JSONObject(crunchifyBuilder.toString());
+			ProfileData profileDAO = new ProfileData();
+			boolean isProfileUpdated = profileDAO.updateConsumerProfile(Integer.parseInt(consumerID), profileData.getString(AppConstants.TABLE_CONSUMER_COLUMN_NAME),
+					profileData.getString(AppConstants.TABLE_CONSUMER_COLUMN_EMAIL), 
+					profileData.getString(AppConstants.TABLE_CONSUMER_COLUMN_ADDRESS), 
+					profileData.getString(AppConstants.TABLE_CONSUMER_COLUMN_CITY), 
+					profileData.getString(AppConstants.TABLE_CONSUMER_COLUMN_STATE), 
+					profileData.getInt(AppConstants.TABLE_CONSUMER_COLUMN_ZIPCODE));
+			if (isProfileUpdated) {
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_CONSUMER_PROFILE_UPDATED);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}
+			
+		} catch (JSONException e) {
+			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
+					e.getMessage(), "");
+		}
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(finalResponseJson.toString()).build();
+
+	}
 }
