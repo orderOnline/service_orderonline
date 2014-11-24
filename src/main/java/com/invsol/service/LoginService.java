@@ -25,7 +25,7 @@ import com.invsol.errorhandling.AppException;
  * @author rkhokhar
  *
  */
-@Path("authenticate")
+@Path("login")
 public class LoginService {
 
 	@POST
@@ -33,7 +33,7 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response loginBusinessUser(InputStream incomingData) throws AppException {
-		System.out.println("I am inside authenticate business user.");
+		System.out.println("I am inside login business user.");
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
 		try {
