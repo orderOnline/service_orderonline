@@ -84,7 +84,7 @@ public class CategoriesService {
 		try {
 			JSONObject categoryData = new JSONObject(crunchifyBuilder.toString());
 			CategoryData objCategory = new CategoryData();
-			boolean isCategoryupdated = objCategory.updateCategory(Integer.parseInt(categoryID), categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
+			boolean isCategoryupdated = objCategory.updateCategory(Integer.parseInt(categoryID), categoryData.getString(AppConstants.JSON_CATEGORY_NAME));
 			if (isCategoryupdated) {
 				JSONObject resultJson = new JSONObject();
 				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
@@ -122,7 +122,7 @@ public class CategoriesService {
 		try {
 			JSONObject categoryData = new JSONObject(crunchifyBuilder.toString());
 			CategoryData objCategory = new CategoryData();
-			CategoryDataObject newAddCat = objCategory.addNewCategory(categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
+			CategoryDataObject newAddCat = objCategory.addNewCategory(categoryData.getString(AppConstants.JSON_CATEGORY_NAME));
 			if (newAddCat != null) {
 				JSONObject resultJson = new JSONObject();
 				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
