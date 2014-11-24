@@ -34,6 +34,13 @@ public class QueryConstants {
 	// Cuisines Specific Queries
 	public static final String QUERY_GET_COUNT_CUISINES = "SELECT COUNT(*) FROM " + AppConstants.TABLE_CUISINE;
 	public static final String QUERY_GET_LIST_OF_ALL_CUISINES = "SELECT * FROM " + AppConstants.TABLE_CUISINE;
+	public static final String QUERY_DELETE_CUISINE = "DELETE FROM " + AppConstants.TABLE_CUISINE
+			+ " WHERE " + AppConstants.TABLE_CUISINE_COLUMN_CUISINE_ID + " = ?";
+	public static final String QUERY_INSERT_CUISINE_DETAILS = "INSERT INTO " + AppConstants.TABLE_CUISINE + "("
+			+ AppConstants.TABLE_CUISINE_COLUMN_CUISINE_NAME + ")" + " VALUES (?)";
+	public static final String QUERY_UPDATE_CUISINE = "UPDATE " + AppConstants.TABLE_CUISINE + " SET (" + 
+			AppConstants.TABLE_CUISINE_COLUMN_CUISINE_NAME + ")" + " = (?)" 
+			+ " WHERE " + AppConstants.TABLE_CUISINE_COLUMN_CUISINE_ID + " = ?";
 
 	// Restaurant Cuisines Specific Queries
 	public static final String QUERY_INSERT_RESTAURANT_CUISINES_DETAILS = "INSERT INTO "

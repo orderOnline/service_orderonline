@@ -20,6 +20,8 @@ public class AppConstants {
 	public static String TABLE_RESTAURANT_COLUMN_GCMKEY = "gcm_reg_key";
 	
 	public static String TABLE_CUISINE = "cusines";
+	public static String TABLE_CUISINE_COLUMN_CUISINE_ID = "cusine_id";
+	public static String TABLE_CUISINE_COLUMN_CUISINE_NAME = "cuisine_name";
 	
 	public static String TABLE_RESTAURANT_CUISINE = "restaurant_cusine";
 	public static String TABLE_RESTAURANT_CUISINES_COLUMN_RESTAURANT_ID = "restaurant_id";
@@ -107,6 +109,8 @@ public class AppConstants {
 	public static String JSON_ADDRESS = "address";
 	public static String JSON_CATEGORY_UPDATED = "Category updated sucessfully";
 	public static String JSON_CATEGORY_DELETED = "Category deleted sucessfully";
+	public static String JSON_CUISINE_UPDATED = "Cuisine updated sucessfully";
+	public static String JSON_CUISINE_DELETED = "Cuisine deleted sucessfully";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	
