@@ -23,15 +23,15 @@ import com.invsol.dao.CategoryData;
 import com.invsol.dto.CategoryDataObject;
 import com.invsol.errorhandling.AppException;
 
-@Path("categories")
+@Path("category")
 public class CategoriesService {
 
 	@PUT
 	@Path("/{id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateMenuCategory(@PathParam("id") String restaurantID, InputStream incomingData) {
-
+	public Response updateMenuCategory(@PathParam("id") String categoryID, InputStream incomingData) throws AppException{
+		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
@@ -42,18 +42,32 @@ public class CategoriesService {
 		} catch (Exception e) {
 			System.out.println("Error Parsing: - ");
 		}
-		System.out.println("Profile Data Received: " + crunchifyBuilder.toString());
+		System.out.println("Category Data Received: " + crunchifyBuilder.toString());
+		try {
+			JSONObject categoryData = new JSONObject(crunchifyBuilder.toString());
+			CategoryData objCategory = new CategoryData();
+			boolean isCategoryupdated = objCategory.updateCategory(Integer.parseInt(categoryID), categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
+			if (isCategoryupdated) {
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_CATEGORY_UPDATED);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}
+		} catch (JSONException e) {
+			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
+					e.getMessage(), "");
+		}
 
 		// return HTTP response 200 in case of success
-		return Response.status(200).entity(crunchifyBuilder.toString()).build();
+		return Response.status(200).entity(finalResponseJson.toString()).build();
 
 	}
 
 	@POST
-	@Path("/{restaurant_id}.json")
+	@Path("/add.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenuCategory(@PathParam("restaurant_id") String restaurantID, InputStream incomingData)
+	public Response addMenuCategory(InputStream incomingData)
 			throws AppException {
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
@@ -66,12 +80,11 @@ public class CategoriesService {
 		} catch (Exception e) {
 			System.out.println("Error Parsing: - ");
 		}
-		System.out.println("Authenticate Data Received: " + crunchifyBuilder.toString());
+		System.out.println("Category Data Received: " + crunchifyBuilder.toString());
 		try {
 			JSONObject categoryData = new JSONObject(crunchifyBuilder.toString());
 			CategoryData objCategory = new CategoryData();
-			CategoryDataObject newAddCat = objCategory.addNewCategory(Integer.parseInt(restaurantID),
-					categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
+			CategoryDataObject newAddCat = objCategory.addNewCategory(categoryData.getString(AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME));
 			if (newAddCat != null) {
 				JSONObject resultJson = new JSONObject();
 				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);

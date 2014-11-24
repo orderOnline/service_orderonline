@@ -77,7 +77,7 @@ public class CategoryData {
 		return null;
 	}
 
-	public CategoryDataObject addNewCategory(int restaurant_id, String categoryName) throws AppException {
+	public CategoryDataObject addNewCategory(String categoryName) throws AppException {
 		CategoryDataObject newCat = null;
 		Connection conn = null;
 		conn = DBConnectionUtil.getConnection();
@@ -87,7 +87,6 @@ public class CategoryData {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, categoryName);
-			stmt.setInt(2, restaurant_id);
 			System.out.println("final sql query==" + stmt.toString());
 			int i = stmt.executeUpdate();
 			if (i > 0) {
@@ -129,6 +128,56 @@ public class CategoryData {
 			}
 		}
 		return newCat;
+	}
+	
+	public boolean updateCategory(int categoryID, String categoryName) throws AppException {
+		Connection conn = null;
+		conn = DBConnectionUtil.getConnection();
+		PreparedStatement stmt = null;
+		String sql = QueryConstants.QUERY_UPDATE_CATEGORY;
+		try {
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, categoryName);
+			stmt.setInt(2, categoryID);
+			System.out.println("final sql query==" + stmt.toString());
+			int i = stmt.executeUpdate();
+			if (i > 0) {
+				System.out.println("record updated");
+				conn.commit();
+				return true;
+			} else {
+				System.out.println("record not inserted");
+				conn.commit();
+				throw new AppException(Response.Status.NOT_IMPLEMENTED.getStatusCode(), 500,
+						AppConstants.ERROR_SQL_QUERY_EXECUTION, "", "");
+			}
+		} catch (SQLException se) {
+			System.out.println("got se===" + se.getMessage());
+			if (se.getMessage().startsWith("Duplicate")) {
+				throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 401,
+						AppConstants.ERROR_USER_ALREADY_REGISTERED, se.getMessage(), "");
+			}
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se1) {
+				System.out.println("got se1");
+				se1.printStackTrace();
+
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se2) {
+				System.out.println("got se2");
+				se2.printStackTrace();
+				throw new AppException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), 500,
+						AppConstants.ERROR_SQL_QUERY_EXECUTION, "", "");
+			}
+		}
+		return false;
 	}
 	
 	private int getCategoriesCount( Connection conn, int restaurant_id ) throws AppException{

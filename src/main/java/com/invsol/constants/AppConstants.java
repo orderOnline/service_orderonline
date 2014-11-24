@@ -104,6 +104,7 @@ public class AppConstants {
 	public static String JSON_ORDER = "ORDER";
 	public static String JSON_GCM_KEY = "gcm_key";
 	public static String JSON_ADDRESS = "address";
+	public static String JSON_CATEGORY_UPDATED = "Category updated sucessfully";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	

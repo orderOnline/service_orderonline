@@ -41,14 +41,16 @@ public class QueryConstants {
 
 	// Category Specific Queries
 	public static final String QUERY_INSERT_CATEGORY_DETAILS = "INSERT INTO " + AppConstants.TABLE_CATEGORY + "("
-			+ AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME + "," + AppConstants.TABLE_CATEGORY_COLUMN_RESTAURANT_ID
-			+ ")" + " VALUES (?,?)";
+			+ AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME + ")" + " VALUES (?)";
 	public static final String QUERY_GET_COUNT_CATEGORIES = "SELECT COUNT(*) FROM " + AppConstants.TABLE_CATEGORY
 			+ " WHERE " + AppConstants.TABLE_CATEGORY_COLUMN_RESTAURANT_ID + " = ?";
 	public static final String QUERY_SELECT_RESTAURANT_CATEGORIES = "SELECT "
 			+ AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_ID + "," + AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME
 			+ " FROM " + AppConstants.TABLE_CATEGORY + " WHERE " + AppConstants.TABLE_RESTAURANT_COLUMN_RESTAURANT_ID
 			+ " = ?";
+	public static final String QUERY_UPDATE_CATEGORY = "UPDATE " + AppConstants.TABLE_CATEGORY + " SET (" + 
+			AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME + ")" + " = (?)" 
+			+ " WHERE " + AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_ID + " = ?";
 
 	// MenuItem Specific Queries
 	public static final String QUERY_INSERT_MENUITEM_DETAILS = "INSERT INTO " + AppConstants.TABLE_MENUITEMS + "("
