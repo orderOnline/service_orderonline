@@ -3,9 +3,11 @@ package com.invsol.service;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -14,16 +16,53 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.invsol.constants.AppConstants;
 import com.invsol.dao.CategoryData;
+import com.invsol.dao.CuisineData;
 import com.invsol.dto.CategoryDataObject;
+import com.invsol.dto.CuisineDataObject;
 import com.invsol.errorhandling.AppException;
 
 @Path("category")
 public class CategoriesService {
+	
+	@GET
+	@Path("/{restaurant_id}.json")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCategories(@PathParam("id") String restaurantID) {
+		System.out.println("I am inside this method");
+		CategoryData obj = new CategoryData();
+		CategoryDataObject[] db_data = null;
+		JSONObject finalResponseJson = new JSONObject();
+		try {
+			db_data = obj.getCategories(Integer.parseInt(restaurantID));
+
+			JSONObject resultJson = new JSONObject();
+			resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+			JSONArray categoriesArray = new JSONArray();
+			JSONObject tempCategoryObj = null;
+			for (int i = 0; i < db_data.length; i++) {
+				tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_CATEGORY_ID, db_data[i].getCategory_id());
+				tempCategoryObj.put(AppConstants.JSON_CATEGORY_NAME, db_data[i].getCategory_name());
+				categoriesArray.put(tempCategoryObj);
+			}
+			resultJson.put(AppConstants.JSON_RESPONSE, categoriesArray);
+			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+		} catch (AppException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(finalResponseJson.toString()).build();
+	}
 
 	@PUT
 	@Path("/{id}.json")

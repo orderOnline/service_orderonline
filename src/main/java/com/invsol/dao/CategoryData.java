@@ -10,7 +10,6 @@ import javax.ws.rs.core.Response;
 
 import com.invsol.constants.AppConstants;
 import com.invsol.constants.QueryConstants;
-import com.invsol.dto.BusinessUser;
 import com.invsol.dto.CategoryDataObject;
 import com.invsol.errorhandling.AppException;
 import com.invsol.utilities.DBConnectionUtil;

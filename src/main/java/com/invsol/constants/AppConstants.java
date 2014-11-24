@@ -89,6 +89,7 @@ public class AppConstants {
 	public static String JSON_CONSUMER_PROFILE_UPDATED = "profile updated sucessfully";
 	public static String JSON_MENUITEM_ADDED = "menuitem added successfully";
 	public static String JSON_CATEGORY_ID = "category_id";
+	public static String JSON_CATEGORY_NAME = "category_name";
 	public static String JSON_MENUITEM_ID = "item_id";
 	public static String JSON_VALID_OTP_GENERATED = "otp generated";
 	public static String JSON_BUSINESS_PASSWORD_RESET = "password reset sucessfully";
