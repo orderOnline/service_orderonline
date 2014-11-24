@@ -180,6 +180,39 @@ public class CategoryData {
 		return false;
 	}
 	
+	public boolean deleteCategory(int categoryID) throws AppException{
+		Connection conn = null;
+		conn = DBConnectionUtil.getConnection();
+		PreparedStatement stmt = null;
+		String sql = QueryConstants.QUERY_DELETE_CATEGORY;
+		try {
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, categoryID);
+			stmt.executeUpdate();
+			conn.commit();
+	        stmt.close();
+	        conn.close();
+	        return true;
+		} catch (SQLException se) {
+			System.out.println("got se==="+se.getMessage());
+			if(se.getMessage().startsWith("Duplicate")){
+				throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 401, AppConstants.ERROR_USER_ALREADY_REGISTERED,
+				se.getMessage(), "");
+			}
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se1) {
+				System.out.println("got se1");
+				se1.printStackTrace();
+				
+			}
+		}
+		return false;
+	}
+	
 	private int getCategoriesCount( Connection conn, int restaurant_id ) throws AppException{
 		int count = 0;
 		PreparedStatement stmt = null;

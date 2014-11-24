@@ -14,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -106,10 +105,24 @@ public class CategoriesService {
 	@DELETE
 	@Path("/{id}.json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String deleteMenuCategory(@PathParam("id") String categoryID) {
+	public Response deleteMenuCategory(@PathParam("id") String categoryID) throws AppException{
+		JSONObject finalResponseJson = new JSONObject();
+		try {
+			CategoryData objCategory = new CategoryData();
+			boolean isCategoryupdated = objCategory.deleteCategory(Integer.parseInt(categoryID));
+			if (isCategoryupdated) {
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);
+				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_CATEGORY_DELETED);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}
+		} catch (JSONException e) {
+			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
+					e.getMessage(), "");
+		}
 
-		return ("categoryID is==" + categoryID);
-
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(finalResponseJson.toString()).build();
 	}
 
 }

@@ -51,6 +51,8 @@ public class QueryConstants {
 	public static final String QUERY_UPDATE_CATEGORY = "UPDATE " + AppConstants.TABLE_CATEGORY + " SET (" + 
 			AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME + ")" + " = (?)" 
 			+ " WHERE " + AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_ID + " = ?";
+	public static final String QUERY_DELETE_CATEGORY = "DELETE FROM " + AppConstants.TABLE_CATEGORY
+			+ " WHERE " + AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_ID + " = ?";
 
 	// MenuItem Specific Queries
 	public static final String QUERY_INSERT_MENUITEM_DETAILS = "INSERT INTO " + AppConstants.TABLE_MENUITEMS + "("
