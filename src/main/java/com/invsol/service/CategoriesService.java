@@ -3,7 +3,6 @@ package com.invsol.service;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Calendar;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,9 +21,7 @@ import org.codehaus.jettison.json.JSONObject;
 
 import com.invsol.constants.AppConstants;
 import com.invsol.dao.CategoryData;
-import com.invsol.dao.CuisineData;
 import com.invsol.dto.CategoryDataObject;
-import com.invsol.dto.CuisineDataObject;
 import com.invsol.errorhandling.AppException;
 
 @Path("category")
@@ -105,8 +102,7 @@ public class CategoriesService {
 	@Path("/{restaurant_id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenuCategory(@PathParam("restaurant_id") String restaurantID, InputStream incomingData)
-			throws AppException {
+	public Response addMenuCategory(@PathParam("restaurant_id") String restaurantID, InputStream incomingData) {
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
 		try {
@@ -132,9 +128,29 @@ public class CategoriesService {
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
 		} catch (JSONException e) {
-			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
-					e.getMessage(), "");
-		}
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
+		} catch (AppException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();

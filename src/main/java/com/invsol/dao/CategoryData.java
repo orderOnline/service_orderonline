@@ -104,9 +104,9 @@ public class CategoryData {
 			return newCat;
 		} catch (SQLException se) {
 			System.out.println("got se===" + se.getMessage());
-			if (se.getMessage().startsWith("Duplicate")) {
+			if (se.getMessage().contains("duplicate")) {
 				throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 401,
-						AppConstants.ERROR_USER_ALREADY_REGISTERED, se.getMessage(), "");
+						AppConstants.ERROR_CATEGORY_ALREADY_EXIST, se.getMessage(), "");
 			}
 		} finally {
 			try {

@@ -79,6 +79,7 @@ public class AppConstants {
 	public static String JSON_RESPONSE = "response";
 	public static String JSON_TYPE_SUCCESS = "success";
 	public static String JSON_TYPE_ERROR = "error";
+	public static String JSON_TYPE_ERROR_MESSAGE = "errormessage";
 	public static String JSON_CUISINES = "cuisines";
 	public static String JSON_CUISINE_ID = "cuisine_id";
 	public static String JSON_CUISINE_NAME = "cuisine_name";
@@ -119,5 +120,6 @@ public class AppConstants {
 	public static String ERROR_GENERIC = "Incorrect Request Data.";
 	public static String ERROR_SQL_QUERY_EXECUTION = "Error executing SQL query.";
 	public static String ERROR_USER_ALREADY_REGISTERED = "User already registered with the number.";
+	public static String ERROR_CATEGORY_ALREADY_EXIST = "Category with same name already exists.";
 	//-----------------------------------------------------------------------------------
 }
