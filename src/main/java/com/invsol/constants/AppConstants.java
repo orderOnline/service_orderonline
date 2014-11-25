@@ -94,6 +94,8 @@ public class AppConstants {
 	public static String JSON_CATEGORY_ID = "category_id";
 	public static String JSON_CATEGORY_NAME = "category_name";
 	public static String JSON_MENUITEM_ID = "item_id";
+	public static String JSON_MENUITEM_NAME = "item_name";
+	public static String JSON_MENUITEM_PRICE = "item_price";
 	public static String JSON_VALID_OTP_GENERATED = "otp generated";
 	public static String JSON_BUSINESS_PASSWORD_RESET = "password reset sucessfully";
 	public static String JSON_ITEM_ID = "item_id";
@@ -112,6 +114,8 @@ public class AppConstants {
 	public static String JSON_CATEGORY_DELETED = "Category deleted sucessfully";
 	public static String JSON_CUISINE_UPDATED = "Cuisine updated sucessfully";
 	public static String JSON_CUISINE_DELETED = "Cuisine deleted sucessfully";
+	public static String JSON_MENUITEM_UPDATED = "MenuItem updated sucessfully";
+	public static String JSON_MENUITEM_DELETED = "MenuItem deleted sucessfully";
 	//-----------------------------------------------------------------------------------
 	
 	public static final int GENERIC_APP_ERROR_CODE = 5001;	

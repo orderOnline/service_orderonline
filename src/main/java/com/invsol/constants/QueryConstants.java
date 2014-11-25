@@ -65,8 +65,19 @@ public class QueryConstants {
 	// MenuItem Specific Queries
 	public static final String QUERY_INSERT_MENUITEM_DETAILS = "INSERT INTO " + AppConstants.TABLE_MENUITEMS + "("
 			+ AppConstants.TABLE_MENUITEMS_COLUMN_NAME + "," + AppConstants.TABLE_MENUITEMS_COLUMN_PRICE + ","
-			+ AppConstants.TABLE_MENUITEMS_COLUMN_CUISINE_ID + "," + AppConstants.TABLE_MENUITEMS_COLUMN_CATEGORY_ID
-			+ ")" + " VALUES (?,?,?,?)";
+			+ AppConstants.TABLE_MENUITEMS_COLUMN_CATEGORY_ID
+			+ ")" + " VALUES (?,?,?)";
+	public static final String QUERY_SELECT_CATEGORY_MENUITEMS = "SELECT "
+			+ AppConstants.TABLE_MENUITEMS_COLUMN_ITEM_ID + "," + AppConstants.TABLE_MENUITEMS_COLUMN_NAME + "," + AppConstants.TABLE_MENUITEMS_COLUMN_PRICE
+			+ " FROM " + AppConstants.TABLE_MENUITEMS + " WHERE " + AppConstants.TABLE_MENUITEMS_COLUMN_CATEGORY_ID
+			+ " = ?";
+	public static final String QUERY_GET_COUNT_MENUITEMS = "SELECT COUNT(*) FROM " + AppConstants.TABLE_MENUITEMS
+			+ " WHERE " + AppConstants.TABLE_MENUITEMS_COLUMN_CATEGORY_ID + " = ?";
+	public static final String QUERY_UPDATE_MENUITEM = "UPDATE " + AppConstants.TABLE_MENUITEMS + " SET (" + 
+			AppConstants.TABLE_MENUITEMS_COLUMN_NAME + "," + AppConstants.TABLE_MENUITEMS_COLUMN_PRICE + ")" + " = (?,?)" 
+			+ " WHERE " + AppConstants.TABLE_MENUITEMS_COLUMN_ITEM_ID + " = ?";
+	public static final String QUERY_DELETE_MENUITEM = "DELETE FROM " + AppConstants.TABLE_MENUITEMS
+			+ " WHERE " + AppConstants.TABLE_MENUITEMS_COLUMN_ITEM_ID + " = ?";
 
 	// Order Specific Queries
 	public static final String QUERY_INSERT_ORDER_DETAILS = "INSERT INTO " + AppConstants.TABLE_ORDERDETAILS + "("
