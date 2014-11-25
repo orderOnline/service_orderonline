@@ -76,7 +76,7 @@ public class CategoryData {
 		return null;
 	}
 
-	public CategoryDataObject addNewCategory(String categoryName) throws AppException {
+	public CategoryDataObject addNewCategory(int restaurant_id, String categoryName) throws AppException {
 		CategoryDataObject newCat = null;
 		Connection conn = null;
 		conn = DBConnectionUtil.getConnection();
@@ -86,6 +86,7 @@ public class CategoryData {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, categoryName);
+			stmt.setInt(2, restaurant_id);
 			System.out.println("final sql query==" + stmt.toString());
 			int i = stmt.executeUpdate();
 			if (i > 0) {

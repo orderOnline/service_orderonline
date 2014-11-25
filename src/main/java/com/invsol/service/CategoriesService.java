@@ -102,10 +102,10 @@ public class CategoriesService {
 	}
 
 	@POST
-	@Path("/add.json")
+	@Path("/{restaurant_id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenuCategory(InputStream incomingData)
+	public Response addMenuCategory(@PathParam("restaurant_id") String restaurantID, InputStream incomingData)
 			throws AppException {
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
@@ -122,7 +122,7 @@ public class CategoriesService {
 		try {
 			JSONObject categoryData = new JSONObject(crunchifyBuilder.toString());
 			CategoryData objCategory = new CategoryData();
-			CategoryDataObject newAddCat = objCategory.addNewCategory(categoryData.getString(AppConstants.JSON_CATEGORY_NAME));
+			CategoryDataObject newAddCat = objCategory.addNewCategory(Integer.parseInt(restaurantID), categoryData.getString(AppConstants.JSON_CATEGORY_NAME));
 			if (newAddCat != null) {
 				JSONObject resultJson = new JSONObject();
 				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_SUCCESS);

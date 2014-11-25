@@ -48,7 +48,8 @@ public class QueryConstants {
 
 	// Category Specific Queries
 	public static final String QUERY_INSERT_CATEGORY_DETAILS = "INSERT INTO " + AppConstants.TABLE_CATEGORY + "("
-			+ AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME + ")" + " VALUES (?)";
+			+ AppConstants.TABLE_CATEGORY_COLUMN_CATEGORY_NAME + ","
+			+ AppConstants.TABLE_CATEGORY_COLUMN_RESTAURANT_ID + ")" + " VALUES (?,?)";
 	public static final String QUERY_GET_COUNT_CATEGORIES = "SELECT COUNT(*) FROM " + AppConstants.TABLE_CATEGORY
 			+ " WHERE " + AppConstants.TABLE_CATEGORY_COLUMN_RESTAURANT_ID + " = ?";
 	public static final String QUERY_SELECT_RESTAURANT_CATEGORIES = "SELECT "

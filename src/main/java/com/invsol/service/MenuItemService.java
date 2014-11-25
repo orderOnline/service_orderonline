@@ -14,14 +14,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.invsol.constants.AppConstants;
-import com.invsol.dao.CategoryData;
 import com.invsol.dao.MenuItemData;
-import com.invsol.dto.CategoryDataObject;
 import com.invsol.dto.MenuDataObject;
 import com.invsol.errorhandling.AppException;
 
