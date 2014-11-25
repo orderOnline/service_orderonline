@@ -50,13 +50,30 @@ public class CategoriesService {
 			}
 			resultJson.put(AppConstants.JSON_RESPONSE, categoriesArray);
 			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+		}catch (JSONException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
 		} catch (AppException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();
 	}
@@ -65,7 +82,7 @@ public class CategoriesService {
 	@Path("/{id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateMenuCategory(@PathParam("id") String categoryID, InputStream incomingData) throws AppException{
+	public Response updateMenuCategory(@PathParam("id") String categoryID, InputStream incomingData){
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
 		try {
@@ -89,9 +106,29 @@ public class CategoriesService {
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
 		} catch (JSONException e) {
-			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
-					e.getMessage(), "");
-		}
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
+		} catch (AppException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();
@@ -160,7 +197,7 @@ public class CategoriesService {
 	@DELETE
 	@Path("/{id}.json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteMenuCategory(@PathParam("id") String categoryID) throws AppException{
+	public Response deleteMenuCategory(@PathParam("id") String categoryID){
 		JSONObject finalResponseJson = new JSONObject();
 		try {
 			CategoryData objCategory = new CategoryData();
@@ -171,10 +208,30 @@ public class CategoriesService {
 				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_CATEGORY_DELETED);
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
-		} catch (JSONException e) {
-			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
-					e.getMessage(), "");
-		}
+		}catch (JSONException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
+		} catch (AppException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();
