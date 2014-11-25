@@ -50,11 +50,30 @@ public class CuisinesService {
 			}
 			resultJson.put(AppConstants.JSON_RESPONSE, cuisinesArray);
 			finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+		}catch (JSONException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
 		} catch (AppException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();
 	}
@@ -63,7 +82,7 @@ public class CuisinesService {
 	@Path("/{id}.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateCuisine(@PathParam("id") String cuisineID, InputStream incomingData) throws AppException{
+	public Response updateCuisine(@PathParam("id") String cuisineID, InputStream incomingData){
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
 		try {
@@ -86,10 +105,30 @@ public class CuisinesService {
 				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_CUISINE_UPDATED);
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
-		} catch (JSONException e) {
-			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
-					e.getMessage(), "");
-		}
+		}catch (JSONException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
+		} catch (AppException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();
@@ -100,8 +139,7 @@ public class CuisinesService {
 	@Path("/add.json")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addCuisine(InputStream incomingData)
-			throws AppException {
+	public Response addCuisine(InputStream incomingData) {
 		JSONObject finalResponseJson = new JSONObject();
 		StringBuilder crunchifyBuilder = new StringBuilder();
 		try {
@@ -126,10 +164,30 @@ public class CuisinesService {
 				resultJson.put(AppConstants.JSON_RESPONSE, tempCuisineObj);
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
-		} catch (JSONException e) {
-			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
-					e.getMessage(), "");
-		}
+		}catch (JSONException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
+		} catch (AppException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();
@@ -139,7 +197,7 @@ public class CuisinesService {
 	@DELETE
 	@Path("/{id}.json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteCuisine(@PathParam("id") String cuisineID) throws AppException{
+	public Response deleteCuisine(@PathParam("id") String cuisineID){
 		JSONObject finalResponseJson = new JSONObject();
 		try {
 			CuisineData objCuisine = new CuisineData();
@@ -150,10 +208,30 @@ public class CuisinesService {
 				resultJson.put(AppConstants.JSON_RESPONSE, AppConstants.JSON_CUISINE_DELETED);
 				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
 			}
-		} catch (JSONException e) {
-			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, AppConstants.ERROR_GENERIC,
-					e.getMessage(), "");
-		}
+		}catch (JSONException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} catch (NumberFormatException e) {
+		} catch (AppException e) {
+			try{
+				JSONObject resultJson = new JSONObject();
+				resultJson.put(AppConstants.JSON_TYPE, AppConstants.JSON_TYPE_ERROR);
+				JSONObject tempCategoryObj = new JSONObject();
+				tempCategoryObj.put(AppConstants.JSON_TYPE_ERROR_MESSAGE, e.getMessage());
+				resultJson.put(AppConstants.JSON_RESPONSE, tempCategoryObj);
+				finalResponseJson.put(AppConstants.JSON_RESULT, resultJson);
+			}catch( JSONException ex){
+				
+			}
+		} 
 
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(finalResponseJson.toString()).build();

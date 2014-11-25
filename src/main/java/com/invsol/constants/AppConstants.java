@@ -21,7 +21,7 @@ public class AppConstants {
 	
 	public static String TABLE_CUISINE = "cusines";
 	public static String TABLE_CUISINE_COLUMN_CUISINE_ID = "cusine_id";
-	public static String TABLE_CUISINE_COLUMN_CUISINE_NAME = "cuisine_name";
+	public static String TABLE_CUISINE_COLUMN_CUISINE_NAME = "cusine_name";
 	
 	public static String TABLE_RESTAURANT_CUISINE = "restaurant_cusine";
 	public static String TABLE_RESTAURANT_CUISINES_COLUMN_RESTAURANT_ID = "restaurant_id";
@@ -121,5 +121,6 @@ public class AppConstants {
 	public static String ERROR_SQL_QUERY_EXECUTION = "Error executing SQL query.";
 	public static String ERROR_USER_ALREADY_REGISTERED = "User already registered with the number.";
 	public static String ERROR_CATEGORY_ALREADY_EXIST = "Category with same name already exists.";
+	public static String ERROR_CUISINE_ALREADY_EXIST = "Cuisine with same name already exists.";
 	//-----------------------------------------------------------------------------------
 }
